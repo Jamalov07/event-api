@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+   "module": "CommonJS",
+   "target": "ESNext",
+   "allowSyntheticDefaultImports": true,
+   "experimentalDecorators": true,
+   "emitDecoratorMetadata":  true,
+   "paths": {},
+   "allowJs": true,
+   "declaration": true,
+   "baseUrl": "src",
+   "rootDir": "src",
+   "outDir": "dist",
+   "strictNullChecks": false,
+   "noImplicitAny": true,
+   "resolveJsonModule": true,
+   "skipLibCheck": true
+  }
+}
