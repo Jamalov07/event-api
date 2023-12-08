@@ -8,6 +8,8 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { EventLocation } from '../../event';
 import { LocationEvent } from '../../location';
+import { EventLocationDto } from '../../event/dtos/event-retrieve-one.dtos';
+import { LocationEventDto } from '../../location/dtos/location-retrieve-one.dtos';
 
 export class UserRetrieveOneDtoRequest implements UserRetrieveOneRequest {
 	@IsUUID('4')
@@ -32,7 +34,7 @@ export class UserEventDto implements UserEvent {
 	@ApiProperty({ example: new Date() })
 	startDate: Date;
 
-	@ApiProperty({ example: 1 })
+	@ApiProperty({ example: EventLocationDto })
 	location: EventLocation;
 
 	@ApiProperty({ example: 'about event' })
@@ -55,7 +57,7 @@ export class UserLocationDto implements UserLocation {
 	@ApiProperty({ example: 'locatio name' })
 	name: string;
 
-	@ApiProperty({ example: 1 })
+	@ApiProperty({ example: LocationEventDto })
 	events: LocationEvent[];
 
 	@ApiProperty({ example: new Date() })

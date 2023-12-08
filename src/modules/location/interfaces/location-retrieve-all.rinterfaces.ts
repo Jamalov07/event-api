@@ -2,12 +2,12 @@ import { LocationSortNameEnums, LocationSortTypeEnums } from '../enums';
 import { LocationRetrieveOneResponse } from './location-retrieve-one.interfaces';
 
 export declare interface LocationRetrieveAllRequest {
-	pageNumber: number;
-	pageSize: number;
-	user: number;
-	name: string;
-	sortName: LocationSortNameEnums;
-	sortType: LocationSortTypeEnums;
+	pageNumber?: number;
+	pageSize?: number;
+	user?: number;
+	name?: string;
+	sortName?: LocationSortNameEnums;
+	sortType?: LocationSortTypeEnums;
 	userId: number;
 }
 
