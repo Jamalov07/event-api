@@ -2,13 +2,13 @@ import { UserSortNameEnums, UserSortTypeEnums } from '../enums';
 import { UserRetrieveOneResponse } from './user-retrieve-one.interfaces';
 
 export declare interface UserRetrieveAllRequest {
-	pageNumber: number;
-	pageSize: number;
-	fullName: string;
-	email: string;
-	phoneNumber: string;
-	sortName: UserSortNameEnums;
-	sortType: UserSortTypeEnums;
+	pageNumber?: number;
+	pageSize?: number;
+	fullName?: string;
+	email?: string;
+	phoneNumber?: string;
+	sortName?: UserSortNameEnums;
+	sortType?: UserSortTypeEnums;
 	userId: number;
 }
 
