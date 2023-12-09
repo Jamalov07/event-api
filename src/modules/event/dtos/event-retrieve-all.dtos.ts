@@ -1,7 +1,6 @@
 import {
 	IsDateString,
 	IsEnum,
-	IsNotEmpty,
 	IsNumber,
 	IsOptional,
 	IsPositive,
@@ -16,7 +15,9 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { EventRetrieveOneDtoResponse } from './event-retrieve-one.dtos';
 
-export class EventRetrieveAllDtoRequest implements EventRetrieveAllRequest {
+export class EventRetrieveAllDtoRequest
+	implements Omit<EventRetrieveAllRequest, 'userId'>
+{
 	@IsPositive()
 	@IsNumber()
 	@IsOptional()
@@ -58,10 +59,6 @@ export class EventRetrieveAllDtoRequest implements EventRetrieveAllRequest {
 	@IsEnum(EventSortTypeEnums)
 	@IsOptional()
 	sortType?: EventSortTypeEnums;
-
-	@IsNumber()
-	@IsNotEmpty()
-	userId: number;
 }
 
 export class EventRetrieveAllDtoResponse implements EventRetrieveAllResponse {

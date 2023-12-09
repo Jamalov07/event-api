@@ -24,6 +24,7 @@ export class RemoveEmptyKeysInterceptor implements NestInterceptor {
 				}
 			}),
 		);
+		console.log(request.body, 'bu');
 
 		request.query = Object.fromEntries(
 			Object.keys(request.query).map((key) => {
@@ -32,6 +33,8 @@ export class RemoveEmptyKeysInterceptor implements NestInterceptor {
 				}
 			}),
 		);
+
+		console.log(request.query);
 
 		return next.handle();
 	}

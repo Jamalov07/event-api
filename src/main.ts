@@ -1,7 +1,7 @@
 import { json } from 'express';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { appConfig } from './configs';
 import {
@@ -18,6 +18,7 @@ setImmediate(async (): Promise<void> => {
 
 	app.useGlobalInterceptors(new RemoveEmptyKeysInterceptor());
 	app.useGlobalInterceptors(new PassUserIdInterceptor());
+	app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
 	const document = SwaggerModule.createDocument(app, config);
 	SwaggerModule.setup('docs', app, document);

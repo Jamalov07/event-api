@@ -6,6 +6,7 @@ import {
 	PrimaryGeneratedColumn,
 	Column,
 	ManyToOne,
+	JoinColumn,
 } from 'typeorm';
 import { User } from '../user';
 import { Location } from '../location';
@@ -27,10 +28,20 @@ export class Event {
 	@Column({ name: 'description', type: 'character varying' })
 	description: string;
 
-	@ManyToOne(() => Location, (location) => location.events)
+	@Column({ name: 'location_id', nullable: true })
+	locationId: number;
+	@JoinColumn({ name: 'locationId' })
+	@ManyToOne(() => Location, (location) => location.events, {
+		nullable: true,
+	})
 	location: Location;
 
-	@ManyToOne(() => User, (user) => user.events)
+	@Column({ name: 'user_id' })
+	userId: number;
+	@JoinColumn({ name: 'userId' })
+	@ManyToOne(() => User, (user) => user.events, {
+		nullable: false,
+	})
 	user: User;
 
 	@CreateDateColumn({ name: 'created_at' })
@@ -39,6 +50,6 @@ export class Event {
 	@UpdateDateColumn({ name: 'updated_at' })
 	updatedAt: Date;
 
-	@DeleteDateColumn({ default: null, name: 'deleted_at' })
-	deletedAt: Date;
+	@DeleteDateColumn({ nullable: true, name: 'deleted_at' })
+	deletedAt: Date | null;
 }

@@ -21,6 +21,7 @@ import {
 	MoreThanOrEqual,
 	Repository,
 	FindManyOptions,
+	Not,
 } from 'typeorm';
 
 @Injectable()
@@ -35,6 +36,7 @@ export class EventService {
 	): Promise<EventRetrieveAllResponse> {
 		const events = await this.eventRepository.find({
 			where: {
+				deletedAt: Not(null),
 				// name: Like(`%${payload.name}%`),
 				// description: Like(`%${payload.description}%`),
 				// startDate: MoreThanOrEqual(new Date(payload.startDate)),
@@ -46,8 +48,10 @@ export class EventService {
 			take: payload.pageSize,
 			skip: (payload.pageNumber - 1) * payload.pageSize,
 		});
+		console.log(events);
 		const eventsCount = await this.eventRepository.count({
 			where: {
+				deletedAt: Not(null),
 				// name: Like(`%${payload.name}%`),
 				// description: Like(`%${payload.description}%`),
 				// startDate: MoreThanOrEqual(new Date(payload.startDate)),
@@ -80,7 +84,10 @@ export class EventService {
 
 	async eventCreate(payload: EventCreateRequest): Promise<null> {
 		await this.eventNameCheck({ name: payload.name });
-		await this.eventRepository.create({ ...payload });
+		await this.eventRepository.create({
+			...payload,
+			userId: payload.userId,
+		});
 		return null;
 	}
 

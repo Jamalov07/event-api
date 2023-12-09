@@ -9,14 +9,12 @@ import { ApiProperty } from '@nestjs/swagger';
 import { UserEvent, UserLocation } from '../../user';
 import { UserEventDto, UserLocationDto } from '../../user/dtos';
 
-export class EventRetrieveOneDtoRequest implements EventRetrieveOneRequest {
+export class EventRetrieveOneDtoRequest
+	implements Omit<EventRetrieveOneRequest, 'userId'>
+{
 	@IsNumber()
 	@IsNotEmpty()
 	id: number;
-
-	@IsNumber()
-	@IsNotEmpty()
-	userId: number;
 }
 
 export class EventLocationDto implements EventLocation {

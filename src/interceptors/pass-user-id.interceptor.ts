@@ -18,7 +18,7 @@ export class PassUserIdInterceptor implements NestInterceptor {
 		const request = context.switchToHttp().getRequest<Request>();
 
 		Object.assign(request.body, {
-			userId: '8ec8dd99-973e-4966-9a99-40a0b07325e8',
+			userId: 1,
 		});
 		return next.handle();
 	}

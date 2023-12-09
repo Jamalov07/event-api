@@ -7,11 +7,9 @@ import {
 } from 'class-validator';
 import { EventUpdateRequest } from '../interfaces';
 
-export class EventUpdateDtoRequest implements EventUpdateRequest {
-	@IsNumber()
-	@IsNotEmpty()
-	id: number;
-
+export class EventUpdateDtoRequest
+	implements Omit<EventUpdateRequest, 'userId' | 'id'>
+{
 	@IsString()
 	@IsOptional()
 	name?: string;
@@ -26,9 +24,5 @@ export class EventUpdateDtoRequest implements EventUpdateRequest {
 
 	@IsNumber()
 	@IsOptional()
-	locationId?: string;
-
-	@IsNumber()
-	@IsNotEmpty()
-	userId: number;
+	locationId?: number;
 }
