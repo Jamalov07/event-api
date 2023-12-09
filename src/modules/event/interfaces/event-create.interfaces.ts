@@ -3,5 +3,5 @@ export declare interface EventCreateRequest {
 	endDate: Date;
 	name: string;
 	locationId?: string;
-	userId: string;
+	userId: number;
 }

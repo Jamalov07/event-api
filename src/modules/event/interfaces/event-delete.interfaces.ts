@@ -1,4 +1,4 @@
 export declare interface EventDeleteRequest {
-	id: string;
-	userId: string;
+	id: number;
+	userId: number;
 }

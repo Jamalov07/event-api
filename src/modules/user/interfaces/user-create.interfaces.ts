@@ -3,5 +3,5 @@ export declare interface UserCreateRequest {
 	password: string;
 	phoneNumber: string;
 	email: string;
-	userId: string;
+	userId: number;
 }

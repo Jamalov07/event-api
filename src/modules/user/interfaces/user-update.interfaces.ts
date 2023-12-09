@@ -1,8 +1,8 @@
 export declare interface UserUpdateRequest {
-	id: string;
+	id: number;
 	fullName?: string;
 	password?: string;
 	phoneNumber?: string;
 	email?: string;
-	userId?: string;
+	userId?: number;
 }

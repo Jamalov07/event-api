@@ -1,7 +1,7 @@
 export declare interface LocationUpdateRequest {
-	id: string;
+	id: number;
 	latitude?: string;
 	longutude?: string;
 	name?: string;
-	userId: string;
+	userId: number;
 }
