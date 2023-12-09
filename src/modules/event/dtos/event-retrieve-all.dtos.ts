@@ -6,7 +6,6 @@ import {
 	IsOptional,
 	IsPositive,
 	IsString,
-	IsUUID,
 } from 'class-validator';
 import { EventSortNameEnums, EventSortTypeEnums } from '../enums';
 import {
@@ -36,7 +35,7 @@ export class EventRetrieveAllDtoRequest implements EventRetrieveAllRequest {
 	@IsOptional()
 	name?: string;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsOptional()
 	locationId?: number;
 
@@ -48,7 +47,7 @@ export class EventRetrieveAllDtoRequest implements EventRetrieveAllRequest {
 	@IsOptional()
 	startDate?: number;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsOptional()
 	user?: number;
 
@@ -60,7 +59,7 @@ export class EventRetrieveAllDtoRequest implements EventRetrieveAllRequest {
 	@IsOptional()
 	sortType?: EventSortTypeEnums;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
 	userId: number;
 }

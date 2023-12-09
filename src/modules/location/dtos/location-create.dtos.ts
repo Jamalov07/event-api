@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
 import { LocationCreateRequest } from '../interfaces';
 
 export class LocationCreateDtoRequest implements LocationCreateRequest {
@@ -14,7 +14,7 @@ export class LocationCreateDtoRequest implements LocationCreateRequest {
 	@IsNotEmpty()
 	longutude: string;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	userId: string;
+	userId: number;
 }

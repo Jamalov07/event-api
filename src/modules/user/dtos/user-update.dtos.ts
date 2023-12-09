@@ -4,15 +4,15 @@ import {
 	IsOptional,
 	IsPhoneNumber,
 	IsString,
-	IsUUID,
+	IsNumber,
 	MinLength,
 } from 'class-validator';
 import { UserUpdateRequest } from '../interfaces';
 
 export class UserUpdateDtoRequest implements UserUpdateRequest {
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	id: string;
+	id: number;
 
 	@IsEmail()
 	@IsString()
@@ -32,7 +32,7 @@ export class UserUpdateDtoRequest implements UserUpdateRequest {
 	@IsOptional()
 	password: string;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	userId: string;
+	userId: number;
 }

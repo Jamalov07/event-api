@@ -5,7 +5,6 @@ import {
 	IsOptional,
 	IsPositive,
 	IsString,
-	IsUUID,
 } from 'class-validator';
 import { LocationSortNameEnums, LocationSortTypeEnums } from '../enums';
 import {
@@ -33,7 +32,7 @@ export class LocationRetrieveAllDtoRequest
 	@IsOptional()
 	name?: string;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsOptional()
 	user?: number;
 
@@ -45,7 +44,7 @@ export class LocationRetrieveAllDtoRequest
 	@IsOptional()
 	sortType?: LocationSortTypeEnums;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
 	userId: number;
 }

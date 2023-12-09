@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsString, IsNumber } from 'class-validator';
 import { EventCreateRequest } from '../interfaces';
 
 export class EventCreateDtoRequest implements EventCreateRequest {
@@ -14,11 +14,11 @@ export class EventCreateDtoRequest implements EventCreateRequest {
 	@IsNotEmpty()
 	endDate: Date;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
 	locationId: string;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	userId: string;
+	userId: number;
 }

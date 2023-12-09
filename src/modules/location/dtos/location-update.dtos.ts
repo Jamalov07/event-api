@@ -1,10 +1,10 @@
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
 import { LocationUpdateRequest } from '../interfaces';
 
 export class LocationUpdateDtoRequest implements LocationUpdateRequest {
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	id: string;
+	id: number;
 
 	@IsString()
 	@IsOptional()
@@ -18,7 +18,7 @@ export class LocationUpdateDtoRequest implements LocationUpdateRequest {
 	@IsOptional()
 	longutude: string;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	userId: string;
+	userId: number;
 }

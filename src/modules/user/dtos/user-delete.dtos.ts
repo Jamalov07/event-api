@@ -1,12 +1,12 @@
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 import { UserDeleteRequest } from '../interfaces';
 
 export class UserDeleteDtoRequest implements UserDeleteRequest {
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
 	id: number;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
 	userId: number;
 }

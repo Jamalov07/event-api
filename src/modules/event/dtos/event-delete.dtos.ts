@@ -1,12 +1,12 @@
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 import { EventDeleteRequest } from '../interfaces';
 
 export class EventDeleteDtoRequest implements EventDeleteRequest {
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	id: string;
+	id: number;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	userId: string;
+	userId: number;
 }

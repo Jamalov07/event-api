@@ -15,7 +15,13 @@ import {
 } from './interfaces';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from './event.entity';
-import { LessThanOrEqual, Like, MoreThanOrEqual, Repository } from 'typeorm';
+import {
+	LessThanOrEqual,
+	Like,
+	MoreThanOrEqual,
+	Repository,
+	FindManyOptions,
+} from 'typeorm';
 
 @Injectable()
 export class EventService {
@@ -29,12 +35,12 @@ export class EventService {
 	): Promise<EventRetrieveAllResponse> {
 		const events = await this.eventRepository.find({
 			where: {
-				name: Like(`%${payload.name}%`),
-				description: Like(`%${payload.description}%`),
-				startDate: MoreThanOrEqual(new Date(payload.startDate)),
-				endDate: LessThanOrEqual(new Date(payload.endDate)),
-				location: { id: payload.locationId },
-				user: { id: payload.user },
+				// name: Like(`%${payload.name}%`),
+				// description: Like(`%${payload.description}%`),
+				// startDate: MoreThanOrEqual(new Date(payload.startDate)),
+				// endDate: LessThanOrEqual(new Date(payload.endDate)),
+				// location: { id: payload.locationId },
+				// user: { id: payload.user },
 			},
 			order: { [payload.sortName]: payload.sortType },
 			take: payload.pageSize,
@@ -42,12 +48,12 @@ export class EventService {
 		});
 		const eventsCount = await this.eventRepository.count({
 			where: {
-				name: Like(`%${payload.name}%`),
-				description: Like(`%${payload.description}%`),
-				startDate: MoreThanOrEqual(new Date(payload.startDate)),
-				endDate: LessThanOrEqual(new Date(payload.endDate)),
-				location: { id: payload.locationId },
-				user: { id: payload.user },
+				// name: Like(`%${payload.name}%`),
+				// description: Like(`%${payload.description}%`),
+				// startDate: MoreThanOrEqual(new Date(payload.startDate)),
+				// endDate: LessThanOrEqual(new Date(payload.endDate)),
+				// location: { id: payload.locationId },
+				// user: { id: payload.user },
 			},
 		});
 

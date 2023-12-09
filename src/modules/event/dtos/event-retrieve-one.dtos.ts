@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 import {
 	EventLocation,
 	EventRetrieveOneRequest,
@@ -10,11 +10,11 @@ import { UserEvent, UserLocation } from '../../user';
 import { UserEventDto, UserLocationDto } from '../../user/dtos';
 
 export class EventRetrieveOneDtoRequest implements EventRetrieveOneRequest {
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
 	id: number;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
 	userId: number;
 }

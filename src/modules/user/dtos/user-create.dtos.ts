@@ -3,7 +3,7 @@ import {
 	IsNotEmpty,
 	IsPhoneNumber,
 	IsString,
-	IsUUID,
+	IsNumber,
 	MinLength,
 } from 'class-validator';
 import { UserCreateRequest } from '../interfaces';
@@ -27,7 +27,7 @@ export class UserCreateDtoRequest implements UserCreateRequest {
 	@IsNotEmpty()
 	password: string;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	userId: string;
+	userId: number;
 }

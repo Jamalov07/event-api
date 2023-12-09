@@ -6,7 +6,6 @@ import {
 	IsPhoneNumber,
 	IsPositive,
 	IsString,
-	IsUUID,
 } from 'class-validator';
 import { UserSortNameEnums, UserSortTypeEnums } from '../enums';
 import {
@@ -49,7 +48,7 @@ export class UserRetrieveAllDtoRequest implements UserRetrieveAllRequest {
 	@IsOptional()
 	sortType?: UserSortTypeEnums;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
 	userId: number;
 }

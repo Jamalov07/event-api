@@ -3,14 +3,14 @@ import {
 	IsNotEmpty,
 	IsOptional,
 	IsString,
-	IsUUID,
+	IsNumber,
 } from 'class-validator';
 import { EventUpdateRequest } from '../interfaces';
 
 export class EventUpdateDtoRequest implements EventUpdateRequest {
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	id: string;
+	id: number;
 
 	@IsString()
 	@IsOptional()
@@ -24,11 +24,11 @@ export class EventUpdateDtoRequest implements EventUpdateRequest {
 	@IsOptional()
 	endDate?: Date;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsOptional()
 	locationId?: string;
 
-	@IsUUID('4')
+	@IsNumber()
 	@IsNotEmpty()
-	userId: string;
+	userId: number;
 }
