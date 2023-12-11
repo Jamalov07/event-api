@@ -1,12 +1,4 @@
-import {
-	Entity,
-	CreateDateColumn,
-	UpdateDateColumn,
-	DeleteDateColumn,
-	PrimaryGeneratedColumn,
-	Column,
-	OneToMany,
-} from 'typeorm';
+import { Entity, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Event } from '../event';
 import { Location } from '../location';
 
@@ -33,8 +25,8 @@ export class User {
 	@UpdateDateColumn({ name: 'updated_at' })
 	updatedAt: Date;
 
-	@DeleteDateColumn({ default: null, name: 'deleted_at' })
-	deletedAt: Date;
+	@DeleteDateColumn({ name: 'deleted_at' })
+	deletedAt: Date | null;
 
 	@OneToMany(() => Event, (event) => event.user)
 	events: Event[];

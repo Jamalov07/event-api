@@ -20,7 +20,6 @@ import {
 	Like,
 	MoreThanOrEqual,
 	Repository,
-	FindManyOptions,
 	Not,
 } from 'typeorm';
 
@@ -37,12 +36,18 @@ export class EventService {
 		const events = await this.eventRepository.find({
 			where: {
 				deletedAt: Not(null),
-				// name: Like(`%${payload.name}%`),
-				// description: Like(`%${payload.description}%`),
-				// startDate: MoreThanOrEqual(new Date(payload.startDate)),
-				// endDate: LessThanOrEqual(new Date(payload.endDate)),
-				// location: { id: payload.locationId },
-				// user: { id: payload.user },
+				name: payload.name ? Like(`%${payload.name}%`) : Not(undefined),
+				description: payload.description
+					? Like(`%${payload.description}%`)
+					: Not(undefined),
+				startDate: payload.startDate
+					? MoreThanOrEqual(new Date(payload.startDate))
+					: Not(undefined),
+				endDate: payload.endDate
+					? LessThanOrEqual(new Date(payload.endDate))
+					: Not(undefined),
+				location: { id: payload.locationId ?? Not(undefined) },
+				user: { id: payload.user ?? Not(undefined) },
 			},
 			order: { [payload.sortName]: payload.sortType },
 			take: payload.pageSize,
@@ -52,12 +57,18 @@ export class EventService {
 		const eventsCount = await this.eventRepository.count({
 			where: {
 				deletedAt: Not(null),
-				// name: Like(`%${payload.name}%`),
-				// description: Like(`%${payload.description}%`),
-				// startDate: MoreThanOrEqual(new Date(payload.startDate)),
-				// endDate: LessThanOrEqual(new Date(payload.endDate)),
-				// location: { id: payload.locationId },
-				// user: { id: payload.user },
+				name: payload.name ? Like(`%${payload.name}%`) : Not(undefined),
+				description: payload.description
+					? Like(`%${payload.description}%`)
+					: Not(undefined),
+				startDate: payload.startDate
+					? MoreThanOrEqual(new Date(payload.startDate))
+					: Not(undefined),
+				endDate: payload.endDate
+					? LessThanOrEqual(new Date(payload.endDate))
+					: Not(undefined),
+				location: { id: payload.locationId ?? Not(undefined) },
+				user: { id: payload.user ?? Not(undefined) },
 			},
 		});
 
@@ -84,10 +95,11 @@ export class EventService {
 
 	async eventCreate(payload: EventCreateRequest): Promise<null> {
 		await this.eventNameCheck({ name: payload.name });
-		await this.eventRepository.create({
+		const event = await this.eventRepository.create({
 			...payload,
 			userId: payload.userId,
 		});
+		console.log(event);
 		return null;
 	}
 
