@@ -1,17 +1,10 @@
 import { IsNotEmpty, IsNumber } from 'class-validator';
-import {
-	LocationEvent,
-	LocationRetrieveOneRequest,
-	LocationRetrieveOneResponse,
-	LocationUser,
-} from '../interfaces';
+import { LocationEvent, LocationRetrieveOneRequest, LocationRetrieveOneResponse, LocationUser } from '../interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserEvent, UserLocation } from '../../user';
 import { UserEventDto, UserLocationDto } from '../../user/dtos';
 
-export class LocationRetrieveOneDtoRequest
-	implements LocationRetrieveOneRequest
-{
+export class LocationRetrieveOneDtoRequest implements LocationRetrieveOneRequest {
 	@IsNumber()
 	@IsNotEmpty()
 	id: number;
@@ -64,9 +57,7 @@ export class LocationEventDto implements LocationEvent {
 	createdAt: Date;
 }
 
-export class LocationRetrieveOneDtoResponse
-	implements LocationRetrieveOneResponse
-{
+export class LocationRetrieveOneDtoResponse implements LocationRetrieveOneResponse {
 	@ApiProperty({ example: '8ec8dd99-973e-4966-9a99-40a0b07325e8' })
 	id: number;
 

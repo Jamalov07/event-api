@@ -1,18 +1,6 @@
-import {
-	IsEnum,
-	IsNotEmpty,
-	IsNumber,
-	IsOptional,
-	IsPhoneNumber,
-	IsPositive,
-	IsString,
-} from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsPositive, IsString } from 'class-validator';
 import { UserSortNameEnums, UserSortTypeEnums } from '../enums';
-import {
-	UserRetrieveAllRequest,
-	UserRetrieveAllResponse,
-	UserRetrieveOneResponse,
-} from '../interfaces';
+import { UserRetrieveAllRequest, UserRetrieveAllResponse, UserRetrieveOneResponse } from '../interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRetrieveOneDtoResponse } from './user-retrieve-one.dtos';
 

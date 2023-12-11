@@ -1,10 +1,5 @@
 import { IsNotEmpty, IsNumber } from 'class-validator';
-import {
-	UserEvent,
-	UserLocation,
-	UserRetrieveOneRequest,
-	UserRetrieveOneResponse,
-} from '../interfaces';
+import { UserEvent, UserLocation, UserRetrieveOneRequest, UserRetrieveOneResponse } from '../interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { EventLocation } from '../../event';
 import { LocationEvent } from '../../location';

@@ -1,8 +1,4 @@
-import {
-	BadRequestException,
-	Injectable,
-	NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import {
 	LocationCreateRequest,
 	LocationDeleteRequest,
@@ -24,9 +20,7 @@ export class LocationService {
 		private locationRepository: Repository<Location>,
 	) {}
 
-	async locationRetrieveAll(
-		payload: LocationRetrieveAllRequest,
-	): Promise<LocationRetrieveAllResponse> {
+	async locationRetrieveAll(payload: LocationRetrieveAllRequest): Promise<LocationRetrieveAllResponse> {
 		const locations = await this.locationRepository.find({
 			where: {
 				name: Like(`%${payload.name}%`),
@@ -52,9 +46,7 @@ export class LocationService {
 		};
 	}
 
-	async locationRetrieveOne(
-		payload: LocationRetrieveOneRequest,
-	): Promise<LocationRetrieveOneResponse> {
+	async locationRetrieveOne(payload: LocationRetrieveOneRequest): Promise<LocationRetrieveOneResponse> {
 		const location = await this.locationRepository.findOne({
 			where: { id: payload.id },
 		});
@@ -76,10 +68,7 @@ export class LocationService {
 			userId: payload.userId,
 		});
 		await this.locationNameCheck({ name: payload.name, id: payload.id });
-		await this.locationRepository.update(
-			{ id: payload.id },
-			{ ...payload },
-		);
+		await this.locationRepository.update({ id: payload.id }, { ...payload });
 		return null;
 	}
 

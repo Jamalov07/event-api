@@ -1,23 +1,10 @@
-import {
-	IsEnum,
-	IsNotEmpty,
-	IsNumber,
-	IsOptional,
-	IsPositive,
-	IsString,
-} from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
 import { LocationSortNameEnums, LocationSortTypeEnums } from '../enums';
-import {
-	LocationRetrieveAllRequest,
-	LocationRetrieveAllResponse,
-	LocationRetrieveOneResponse,
-} from '../interfaces';
+import { LocationRetrieveAllRequest, LocationRetrieveAllResponse, LocationRetrieveOneResponse } from '../interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { LocationRetrieveOneDtoResponse } from './location-retrieve-one.dtos';
 
-export class LocationRetrieveAllDtoRequest
-	implements LocationRetrieveAllRequest
-{
+export class LocationRetrieveAllDtoRequest implements LocationRetrieveAllRequest {
 	@IsPositive()
 	@IsNumber()
 	@IsOptional()
@@ -49,9 +36,7 @@ export class LocationRetrieveAllDtoRequest
 	userId: number;
 }
 
-export class LocationRetrieveAllDtoResponse
-	implements LocationRetrieveAllResponse
-{
+export class LocationRetrieveAllDtoResponse implements LocationRetrieveAllResponse {
 	@ApiProperty({ example: 1 })
 	pageNumber: number;
 

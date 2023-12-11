@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
+import { IsDateString, IsOptional, IsString, IsNumber } from 'class-validator';
 import { EventUpdateRequest } from '../interfaces';
 
 export class EventUpdateDtoRequest implements Omit<EventUpdateRequest, 'userId' | 'id'> {

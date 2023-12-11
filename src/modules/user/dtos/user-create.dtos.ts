@@ -1,11 +1,4 @@
-import {
-	IsEmail,
-	IsNotEmpty,
-	IsPhoneNumber,
-	IsString,
-	IsNumber,
-	MinLength,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString, IsNumber, MinLength } from 'class-validator';
 import { UserCreateRequest } from '../interfaces';
 
 export class UserCreateDtoRequest implements UserCreateRequest {

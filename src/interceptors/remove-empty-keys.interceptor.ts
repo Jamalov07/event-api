@@ -1,9 +1,4 @@
-import {
-	CallHandler,
-	ExecutionContext,
-	Injectable,
-	NestInterceptor,
-} from '@nestjs/common';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { UserService } from '../modules';
@@ -11,10 +6,7 @@ import { UserService } from '../modules';
 @Injectable()
 export class RemoveEmptyKeysInterceptor implements NestInterceptor {
 	readonly user: UserService;
-	async intercept(
-		context: ExecutionContext,
-		next: CallHandler,
-	): Promise<Observable<any>> {
+	async intercept(context: ExecutionContext, next: CallHandler): Promise<Observable<any>> {
 		const request = context.switchToHttp().getRequest<Request>();
 
 		request.body = Object.fromEntries(

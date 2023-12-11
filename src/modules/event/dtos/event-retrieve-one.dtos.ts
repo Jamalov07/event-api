@@ -1,17 +1,10 @@
 import { IsNotEmpty, IsNumber } from 'class-validator';
-import {
-	EventLocation,
-	EventRetrieveOneRequest,
-	EventRetrieveOneResponse,
-	EventUser,
-} from '../interfaces';
+import { EventLocation, EventRetrieveOneRequest, EventRetrieveOneResponse, EventUser } from '../interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserEvent, UserLocation } from '../../user';
 import { UserEventDto, UserLocationDto } from '../../user/dtos';
 
-export class EventRetrieveOneDtoRequest
-	implements Omit<EventRetrieveOneRequest, 'userId'>
-{
+export class EventRetrieveOneDtoRequest implements Omit<EventRetrieveOneRequest, 'userId'> {
 	@IsNumber()
 	@IsNotEmpty()
 	id: number;
