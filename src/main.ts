@@ -4,10 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { appConfig } from './configs';
-import {
-	PassUserIdInterceptor,
-	RemoveEmptyKeysInterceptor,
-} from './interceptors';
+import { PassUserIdInterceptor, RemoveEmptyKeysInterceptor } from './interceptors';
 
 setImmediate(async (): Promise<void> => {
 	const app = await NestFactory.create<INestApplication>(AppModule, {
@@ -16,7 +13,7 @@ setImmediate(async (): Promise<void> => {
 	const config = new DocumentBuilder().build();
 	app.use(json({ limit: '50mb' }));
 
-	app.useGlobalInterceptors(new RemoveEmptyKeysInterceptor());
+	// app.useGlobalInterceptors(new RemoveEmptyKeysInterceptor());
 	app.useGlobalInterceptors(new PassUserIdInterceptor());
 	app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 

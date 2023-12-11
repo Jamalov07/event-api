@@ -1,7 +1,8 @@
 export declare interface EventCreateRequest {
+	name: string;
+	description: string;
 	startDate: Date;
 	endDate: Date;
-	name: string;
 	locationId?: number;
 	userId: number;
 }

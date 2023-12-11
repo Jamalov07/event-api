@@ -1,18 +1,14 @@
-import {
-	IsDateString,
-	IsNotEmpty,
-	IsOptional,
-	IsString,
-	IsNumber,
-} from 'class-validator';
+import { IsDateString, IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
 import { EventUpdateRequest } from '../interfaces';
 
-export class EventUpdateDtoRequest
-	implements Omit<EventUpdateRequest, 'userId' | 'id'>
-{
+export class EventUpdateDtoRequest implements Omit<EventUpdateRequest, 'userId' | 'id'> {
 	@IsString()
 	@IsOptional()
 	name?: string;
+
+	@IsString()
+	@IsOptional()
+	description: string;
 
 	@IsDateString()
 	@IsOptional()

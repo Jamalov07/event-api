@@ -4,7 +4,10 @@ import { Location } from '../location';
 
 @Entity({ name: 'event' })
 export class Event {
-	@PrimaryGeneratedColumn()
+	@PrimaryGeneratedColumn({
+		name: 'id',
+		type: 'integer',
+	})
 	id: number;
 
 	@Column({ name: 'name', type: 'character varying' })

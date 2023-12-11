@@ -1,8 +1,4 @@
-import {
-	BadRequestException,
-	Injectable,
-	NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import {
 	UserCreateRequest,
 	UserDeleteRequest,
@@ -24,15 +20,12 @@ export class UserService {
 		private userRepository: Repository<User>,
 	) {}
 
-	async userRetrieveAll(
-		payload: UserRetrieveAllRequest,
-	): Promise<UserRetrieveAllResponse> {
+	async userRetrieveAll(payload: UserRetrieveAllRequest): Promise<UserRetrieveAllResponse> {
 		const users = await this.userRepository.find({
 			where: {
-				deletedAt: Not(null),
-				fullName: Like(`%${payload.fullName}%`),
-				phoneNumber: Like(`%${payload.phoneNumber}%`),
-				email: Like(`%${payload.email}%`),
+				fullName: payload.fullName ? Like(`%${payload.fullName}%`) : Not(undefined),
+				phoneNumber: payload.phoneNumber ? Like(`%${payload.phoneNumber}%`) : Not(undefined),
+				email: payload.email ? Like(`%${payload.email}%`) : Not(undefined),
 			},
 			order: { [payload.sortName]: payload.sortType },
 			take: payload.pageSize,
@@ -40,10 +33,9 @@ export class UserService {
 		});
 		const usersCount = await this.userRepository.count({
 			where: {
-				deletedAt: Not(null),
-				fullName: Like(`%${payload.fullName}%`),
-				phoneNumber: Like(`%${payload.phoneNumber}%`),
-				email: Like(`%${payload.email}%`),
+				fullName: payload.fullName ? Like(`%${payload.fullName}%`) : Not(undefined),
+				phoneNumber: payload.phoneNumber ? Like(`%${payload.phoneNumber}%`) : Not(undefined),
+				email: payload.email ? Like(`%${payload.email}%`) : Not(undefined),
 			},
 		});
 
@@ -52,16 +44,12 @@ export class UserService {
 			pageNumber: payload.pageNumber,
 			pageSize: users.length,
 			totalCount: usersCount,
-			totalPages: usersCount / payload.pageSize,
+			totalPages: Math.ceil(usersCount / payload.pageSize),
 		};
 	}
 
-	async userRetrieveOne(
-		payload: UserRetrieveOneRequest,
-	): Promise<UserRetrieveOneResponse> {
-		const user = await this.userRepository.findOne({
-			where: { deletedAt: Not(null), id: payload.id },
-		});
+	async userRetrieveOne(payload: UserRetrieveOneRequest): Promise<UserRetrieveOneResponse> {
+		const user = await this.userRepository.findOne({ where: { id: payload.id } });
 		if (!user) {
 			throw new NotFoundException('user not found');
 		}
@@ -69,25 +57,17 @@ export class UserService {
 	}
 
 	async userCreate(payload: UserCreateRequest): Promise<null> {
-		await this.userEmailPhoneCheck({
-			email: payload.email,
-			phoneNumber: payload.phoneNumber,
-		});
-		await this.userRepository.create({ ...payload });
+		await this.userEmailPhoneCheck({ email: payload.email, phoneNumber: payload.phoneNumber });
+		const newUser = this.userRepository.create({ ...payload });
+		await this.userRepository.save(newUser);
 		return null;
 	}
 
 	async userUpdate(payload: UserUpdateRequest): Promise<null> {
-		await this.userRetrieveOne({
-			id: payload.id,
-			userId: payload.userId,
-		});
-		await this.userEmailPhoneCheck({
-			email: payload.email,
-			phoneNumber: payload.phoneNumber,
-			id: payload.id,
-		});
+		const user = await this.userRetrieveOne({ id: payload.id, userId: payload.userId });
+		await this.userEmailPhoneCheck({ email: payload.email, phoneNumber: payload.phoneNumber, id: payload.id });
 		await this.userRepository.update({ id: payload.id }, { ...payload });
+		await this.userRepository.save(user);
 		return null;
 	}
 
@@ -97,26 +77,17 @@ export class UserService {
 		return null;
 	}
 
-	private async userEmailPhoneCheck(
-		payload: UserEmailPhoneCheck,
-	): Promise<void> {
+	private async userEmailPhoneCheck(payload: UserEmailPhoneCheck): Promise<void> {
 		const user = await this.userRepository.findOne({
-			where: [
-				{ email: payload.email },
-				{ phoneNumber: payload.phoneNumber },
-			],
+			where: [{ email: payload.email }, { phoneNumber: payload.phoneNumber }],
 		});
 		if (payload.id) {
 			if (user && payload.id !== user.id) {
-				throw new BadRequestException(
-					'user email or user phone number already exists',
-				);
+				throw new BadRequestException('user email or user phone number already exists');
 			}
 		} else {
 			if (user) {
-				throw new BadRequestException(
-					'user email or user phone number already exists',
-				);
+				throw new BadRequestException('user email or user phone number already exists');
 			}
 		}
 	}

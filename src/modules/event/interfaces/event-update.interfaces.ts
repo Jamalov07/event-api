@@ -1,8 +1,9 @@
 export declare interface EventUpdateRequest {
 	id: number;
+	name?: string;
+	description?: string;
 	startDate?: Date;
 	endDate?: Date;
-	name?: string;
 	locationId?: number;
 	userId: number;
 }

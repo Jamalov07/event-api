@@ -1,23 +1,10 @@
-import {
-	IsDateString,
-	IsEnum,
-	IsNumber,
-	IsOptional,
-	IsPositive,
-	IsString,
-} from 'class-validator';
+import { IsDateString, IsEnum, IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
 import { EventSortNameEnums, EventSortTypeEnums } from '../enums';
-import {
-	EventRetrieveAllRequest,
-	EventRetrieveAllResponse,
-	EventRetrieveOneResponse,
-} from '../interfaces';
+import { EventRetrieveAllRequest, EventRetrieveAllResponse, EventRetrieveOneResponse } from '../interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { EventRetrieveOneDtoResponse } from './event-retrieve-one.dtos';
 
-export class EventRetrieveAllDtoRequest
-	implements Omit<EventRetrieveAllRequest, 'userId'>
-{
+export class EventRetrieveAllDtoRequest implements Omit<EventRetrieveAllRequest, 'userId'> {
 	@IsPositive()
 	@IsNumber()
 	@IsOptional()

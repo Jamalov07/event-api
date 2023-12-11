@@ -19,6 +19,12 @@ export class User {
 	@Column({ type: 'character varying', name: 'email' })
 	email: string;
 
+	@OneToMany(() => Event, (event) => event.user)
+	events: Event[];
+
+	@OneToMany(() => Location, (location) => location.user)
+	locations: Location[];
+
 	@CreateDateColumn({ name: 'created_at' })
 	createdAt: Date;
 
@@ -27,10 +33,4 @@ export class User {
 
 	@DeleteDateColumn({ name: 'deleted_at' })
 	deletedAt: Date | null;
-
-	@OneToMany(() => Event, (event) => event.user)
-	events: Event[];
-
-	@OneToMany(() => Location, (location) => location.user)
-	locations: Location[];
 }

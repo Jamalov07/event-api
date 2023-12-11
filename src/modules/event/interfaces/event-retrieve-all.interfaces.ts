@@ -4,12 +4,12 @@ import { EventRetrieveOneResponse } from './event-retrieve-one.interfaces';
 export declare interface EventRetrieveAllRequest {
 	pageNumber?: number;
 	pageSize?: number;
-	startDate?: number;
-	endDate?: number;
-	locationId?: number;
-	user?: number;
 	name?: string;
 	description?: string;
+	startDate?: number;
+	endDate?: number;
+	user?: number;
+	locationId?: number;
 	sortName?: EventSortNameEnums;
 	sortType?: EventSortTypeEnums;
 	userId: number;
