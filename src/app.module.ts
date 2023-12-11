@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { databaseConfig } from './configs';
+import { databaseConfig, jwtConfig } from './configs';
 import { AuthModule, EventModule, LocationModule, UserModule } from './modules';
 
 @Module({
 	imports: [
 		ConfigModule.forRoot({
 			isGlobal: true,
-			load: [databaseConfig],
+			load: [databaseConfig, jwtConfig],
 		}),
 		TypeOrmModule.forRootAsync({
 			inject: [ConfigService],
