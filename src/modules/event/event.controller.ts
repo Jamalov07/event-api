@@ -11,8 +11,8 @@ import {
 	EventUpdateDtoRequest,
 } from './dtos';
 import { EventSortNameEnums, EventSortTypeEnums } from './enums';
-import { UserIdRetrieve } from '../../decorators';
-import { UserIdDto } from '../auth';
+import { User } from '../../decorators';
+import { DecodedToken } from '../auth';
 
 @ApiTags('Event')
 @ApiHeaders([{ name: 'Authorization', description: 'Bearer token' }])
@@ -35,10 +35,10 @@ export class EventController {
 	@ApiQuery({ name: 'user', required: false, type: Number })
 	@ApiQuery({ name: 'sortName', required: false, type: String })
 	@ApiQuery({ name: 'sortType', required: false, type: String })
-	eventRetrieveAll(@Query() query: EventRetrieveAllDtoRequest, @UserIdRetrieve() user: UserIdDto): Promise<EventRetrieveAllDtoResponse> {
+	eventRetrieveAll(@Query() query: EventRetrieveAllDtoRequest, @User() user: DecodedToken): Promise<EventRetrieveAllDtoResponse> {
 		return this.#_service.eventRetrieveAll({
 			...query,
-			...user,
+			user,
 			pageNumber: query.pageNumber ?? 1,
 			pageSize: query.pageSize ?? 10,
 			sortName: query.sortName ?? ('createdAt' as EventSortNameEnums),
@@ -48,25 +48,25 @@ export class EventController {
 
 	@HttpCode(HttpStatus.OK)
 	@Get(':id')
-	eventRetrieveOne(@Param() params: EventRetrieveOneDtoRequest, @UserIdRetrieve() user: UserIdDto): Promise<EventRetrieveOneDtoResponse> {
-		return this.#_service.eventRetrieveOne({ ...params, ...user });
+	eventRetrieveOne(@Param() params: EventRetrieveOneDtoRequest, @User() user: DecodedToken): Promise<EventRetrieveOneDtoResponse> {
+		return this.#_service.eventRetrieveOne({ ...params, user });
 	}
 
 	@HttpCode(HttpStatus.OK)
 	@Post()
-	eventCreate(@Body() body: EventCreateDtoRequest, @UserIdRetrieve() user: UserIdDto): Promise<null> {
-		return this.#_service.eventCreate({ ...body, ...user });
+	eventCreate(@Body() body: EventCreateDtoRequest, @User() user: DecodedToken): Promise<null> {
+		return this.#_service.eventCreate({ ...body, user });
 	}
 
 	@HttpCode(HttpStatus.OK)
 	@Patch(':id')
-	eventUpdate(@Param() params: EventRetrieveOneDtoRequest, @Body() body: EventUpdateDtoRequest, @UserIdRetrieve() user: UserIdDto): Promise<null> {
-		return this.#_service.eventUpdate({ ...params, ...body, ...user });
+	eventUpdate(@Param() params: EventRetrieveOneDtoRequest, @Body() body: EventUpdateDtoRequest, @User() user: DecodedToken): Promise<null> {
+		return this.#_service.eventUpdate({ ...params, ...body, user });
 	}
 
 	@HttpCode(HttpStatus.OK)
 	@Delete(':id')
-	eventDelete(@Param() params: EventDeleteDtoRequest, @UserIdRetrieve() user: UserIdDto): Promise<null> {
-		return this.#_service.eventDelete({ ...params, ...user });
+	eventDelete(@Param() params: EventDeleteDtoRequest, @User() user: DecodedToken): Promise<null> {
+		return this.#_service.eventDelete({ ...params, user });
 	}
 }

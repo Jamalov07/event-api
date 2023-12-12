@@ -4,7 +4,7 @@ import { EventRetrieveAllRequest, EventRetrieveAllResponse, EventRetrieveOneResp
 import { ApiProperty } from '@nestjs/swagger';
 import { EventRetrieveOneDtoResponse } from './event-retrieve-one.dtos';
 
-export class EventRetrieveAllDtoRequest implements Omit<EventRetrieveAllRequest, 'userId'> {
+export class EventRetrieveAllDtoRequest implements Omit<EventRetrieveAllRequest, 'user'> {
 	@IsPositive()
 	@IsNumber()
 	@IsOptional()

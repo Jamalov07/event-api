@@ -9,9 +9,7 @@ export class PassUserIdInterceptor implements NestInterceptor {
 	async intercept(context: ExecutionContext, next: CallHandler): Promise<Observable<any>> {
 		const request = context.switchToHttp().getRequest<Request>();
 
-		Object.assign(request.body, {
-			userId: 1,
-		});
+		Object.assign(request.body, { user: { id: 1 } });
 		return next.handle();
 	}
 }

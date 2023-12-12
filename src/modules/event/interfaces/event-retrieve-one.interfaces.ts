@@ -1,8 +1,9 @@
+import { JwtSignPayload } from '../../auth/interfaces';
 import { UserEvent, UserLocation } from '../../user';
 
 export declare interface EventRetrieveOneRequest {
 	id: number;
-	userId: number;
+	user: JwtSignPayload;
 }
 
 export declare interface EventLocation {

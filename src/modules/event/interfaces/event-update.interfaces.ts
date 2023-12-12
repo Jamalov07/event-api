@@ -1,3 +1,5 @@
+import { JwtSignPayload } from '../../auth/interfaces';
+
 export declare interface EventUpdateRequest {
 	id: number;
 	name?: string;
@@ -5,5 +7,5 @@ export declare interface EventUpdateRequest {
 	startDate?: Date;
 	endDate?: Date;
 	locationId?: number;
-	userId: number;
+	user: JwtSignPayload;
 }

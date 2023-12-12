@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString, IsNumber, MinLength } from 'class-validator';
 import { UserCreateRequest } from '../interfaces';
 
-export class UserCreateDtoRequest implements UserCreateRequest {
+export class UserCreateDtoRequest implements Omit<UserCreateRequest, 'user'> {
 	@IsEmail()
 	@IsString()
 	@IsNotEmpty()
@@ -19,8 +19,4 @@ export class UserCreateDtoRequest implements UserCreateRequest {
 	@IsString()
 	@IsNotEmpty()
 	password: string;
-
-	@IsNumber()
-	@IsNotEmpty()
-	userId: number;
 }

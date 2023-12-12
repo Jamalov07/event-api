@@ -27,8 +27,8 @@ export class EventService {
 				description: payload.description ? Like(`%${payload.description}%`) : Not(undefined),
 				startDate: payload.startDate ? MoreThanOrEqual(new Date(payload.startDate)) : Not(undefined),
 				endDate: payload.endDate ? LessThanOrEqual(new Date(payload.endDate)) : Not(undefined),
-				location: { id: payload.locationId ?? Not(undefined) },
-				user: { id: payload.user ?? Not(undefined) },
+				locationId: payload.locationId ?? Not(undefined),
+				userId: payload.userId ?? Not(undefined),
 			},
 			order: { [payload.sortName]: payload.sortType },
 			take: payload.pageSize,
@@ -41,8 +41,8 @@ export class EventService {
 				description: payload.description ? Like(`%${payload.description}%`) : Not(undefined),
 				startDate: payload.startDate ? MoreThanOrEqual(new Date(payload.startDate)) : Not(undefined),
 				endDate: payload.endDate ? LessThanOrEqual(new Date(payload.endDate)) : Not(undefined),
-				location: { id: payload.locationId ?? Not(undefined) },
-				user: { id: payload.user ?? Not(undefined) },
+				locationId: payload.locationId ?? Not(undefined),
+				userId: payload.userId ?? Not(undefined),
 			},
 		});
 
@@ -65,13 +65,13 @@ export class EventService {
 
 	async eventCreate(payload: EventCreateRequest): Promise<null> {
 		await this.eventNameCheck({ name: payload.name });
-		const event = this.eventRepository.create({ ...payload, userId: payload.userId });
+		const event = this.eventRepository.create({ ...payload, userId: payload.user.id });
 		await this.eventRepository.save(event);
 		return null;
 	}
 
 	async eventUpdate(payload: EventUpdateRequest): Promise<null> {
-		const event = await this.eventRetrieveOne({ id: payload.id, userId: payload.userId });
+		const event = await this.eventRetrieveOne({ id: payload.id, user: payload.user });
 		await this.eventNameCheck({ name: payload.name, id: payload.id });
 		await this.eventRepository.update({ id: payload.id }, { ...payload });
 		await this.eventRepository.save(event);

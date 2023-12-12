@@ -1,1 +1,1 @@
-export * from './user-id.dtos';
+export * from './user-in-token.dtos';
